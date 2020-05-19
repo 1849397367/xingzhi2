@@ -40,6 +40,7 @@ public class TestServer {
 		out.write("hello客户端".getBytes());
 		client.close();
 		
+		
 	}
 
 }
