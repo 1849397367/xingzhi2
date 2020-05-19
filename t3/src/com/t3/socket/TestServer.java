@@ -14,7 +14,7 @@ public class TestServer {
 	public static void main(String[] args) 
 			throws IOException {
 		ServerSocket serverSocket
-			= new ServerSocket(10087);
+			= new ServerSocket(10088);
 		
 		Socket client = serverSocket.accept();
 		System.out.println(client
@@ -39,6 +39,7 @@ public class TestServer {
 			= client.getOutputStream();
 		out.write("hello客户端".getBytes());
 		client.close();
+		
 		
 		
 	}
