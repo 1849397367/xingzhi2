@@ -21,6 +21,7 @@ public class TestServer {
 			= new BufferedReader(
 					new InputStreamReader(
 							client.getInputStream()));
+		
 	}
 
 }
