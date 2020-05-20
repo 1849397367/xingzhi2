@@ -24,4 +24,9 @@ public class Person {
 	public void show() {
 		System.out.println("1234");
 	}
+	@Override
+	public String toString() {
+		return "Person [id=" + id + ", name=" + name + "]";
+	}
+	
 }
