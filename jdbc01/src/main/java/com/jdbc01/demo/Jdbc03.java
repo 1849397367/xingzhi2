@@ -49,15 +49,15 @@ public class Jdbc03 {
 		//根据用户id和用户名，判断用户是否存在
 		//存在返回true，否则返回false
 		getParams("src/main/resources/pro.properties");
-		Scanner sc = new Scanner(System.in);
+		/*Scanner sc = new Scanner(System.in);
 		System.out.println("请输入用户名");
 		String name = sc.next();
 		System.out.println("请输入密码");
-		String pwd = sc.next();
+		String pwd = sc.next();*/
 		
 		 //select * from person where name='zs' and pwd='1' or 1=1
 				 
-		boolean bool = login("zs","5' or '1=1");
+		boolean bool = login("zs","123");
 		System.out.println(bool);
 	}
 	private static boolean login(String name, String  pwd) {
