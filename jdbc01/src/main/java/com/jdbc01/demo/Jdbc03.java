@@ -12,6 +12,19 @@ import java.sql.Statement;
 import java.util.Properties;
 import java.util.Scanner;
 
+import com.mysql.jdbc.PreparedStatement;
+/**
+ * SQL注入：
+ * 			将恶意的SQL命令注入到后台数据库引擎执行的能力，
+ * 可以通过输入sql语句得到一个存在安全漏洞的网站上的数据库，不按照
+ * 设计者意图去执行SQL语句。
+ * 			
+ * 			例如:很多影视网站泄露的VIP会员密码大多是通过web表单
+ * 提交查询字符暴漏出的。
+ * 
+ * @author zhujn
+ *
+ */
 public class Jdbc03 {
 	private static String url;
 	private static String dbUser;
@@ -50,21 +63,27 @@ public class Jdbc03 {
 	private static boolean login(String name, String  pwd) {
 		boolean flag = true;//新建一个标志变量
 		Connection conn = null;//连接对象
-		Statement stmt = null;//语句对象
+	//	Statement stmt = null;//语句对象
+		
+		PreparedStatement pstmt = null;
 		try {
 			conn = DriverManager.getConnection(url,dbUser,dbPassword);
-			stmt = conn.createStatement();
-			String sql = "select * from person where name ='"+name+"'and pwd= '"+pwd+"'";
-			ResultSet resultSet= stmt.executeQuery(sql);
+			
+		//	String sql = "select * from person where name ='"+name+"'and pwd= '"+pwd+"'";
+			String sql = "select * from person where name = ? and pwd= ? ";
+			pstmt = (PreparedStatement) conn.prepareStatement(sql);
+			pstmt.setObject(1, name);
+			pstmt.setObject(2, pwd);
+			ResultSet resultSet = pstmt.executeQuery();
 			if(!resultSet.next()) {
 				flag = false;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			if(stmt!=null) {
+			if(pstmt!=null) {
 				try {
-					stmt.close();
+					pstmt.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
