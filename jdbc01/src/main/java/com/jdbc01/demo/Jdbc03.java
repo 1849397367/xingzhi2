@@ -41,7 +41,10 @@ public class Jdbc03 {
 		String name = sc.next();
 		System.out.println("请输入密码");
 		String pwd = sc.next();
-		boolean bool = login(name,pwd);
+		
+		 //select * from person where name='zs' and pwd='1' or 1=1
+				 
+		boolean bool = login("zs","5' or '1=1");
 		System.out.println(bool);
 	}
 	private static boolean login(String name, String  pwd) {
