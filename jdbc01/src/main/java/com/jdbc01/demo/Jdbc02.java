@@ -70,8 +70,78 @@ public class Jdbc02 {
 
 	public static void main(String[] args)throws Exception {
 			getParams("src/main/resources/pro.properties");
-			boolean bool = addPerson(4,"马云",32);
-			System.out.println(bool);
+		//	boolean bool = addPerson(4,"马云",32);
+		//	boolean bl = deletePerson(6);
+			boolean upddatebl = updatePerson(5,"mht2");
+			
+			System.out.println(upddatebl);
+	}
+	private static boolean updatePerson(int i,
+			String name) {
+		boolean flag = false;//新建一个标志变量
+		Connection conn = null;//连接对象
+		Statement stmt = null;//语句对象
+		
+		try {
+			conn = DriverManager.getConnection(url,dbUser,dbPassword);
+			stmt = conn.createStatement();
+			String sql = "update person set name ='"+name+"'where id ="+i;
+			int n = stmt.executeUpdate(sql);//更新方法，返回影响的行数
+			if(n==1) {
+				flag = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(stmt!=null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn!=null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return flag;
+	}
+	private static boolean deletePerson(int i) {
+
+		boolean flag = true;//新建一个标志变量
+		Connection conn = null;//连接对象
+		Statement stmt = null;//语句对象
+		try {
+			conn = DriverManager.getConnection(url,dbUser,dbPassword);
+			stmt = conn.createStatement();
+			String sql = "delete from person where id ="+i;
+			int n = stmt.executeUpdate(sql);//更新方法，返回影响的行数
+			if(n==1) {
+				flag = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(stmt!=null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn!=null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return flag;
 	}
 	
 	
