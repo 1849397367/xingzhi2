@@ -1,0 +1,1 @@
+select * from person;/*查询所有*/
