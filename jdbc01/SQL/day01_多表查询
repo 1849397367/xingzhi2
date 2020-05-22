@@ -34,5 +34,12 @@ where job = (
 	from emp 
 	where deptno = 30)
 /*7.返回员工的姓名、所在部门名及其工资*/
-	
+	select e.ename,d.dname,e.sal
+	from emp e,dept d
+	where e.deptno = d.deptno
 /*8.返回员工工作及其从事此工作的最低工资*/
+	select ename,job,min(sal)
+	from emp 
+	group by job
+	
+	
