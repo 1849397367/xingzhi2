@@ -1,5 +1,6 @@
 select * from emp;
 /*1.查询所有员工的姓名、部门名*/
+
 select e.ename,d.dname
 from emp e,dept d
 where e.deptno = d.deptno
